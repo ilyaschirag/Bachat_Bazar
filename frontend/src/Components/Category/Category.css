@@ -1,0 +1,143 @@
+
+/* Outer Category Container */
+.outCategory {
+    background-color: #ffffff;
+    padding: 10px 0;
+    margin: 10px;
+    border-radius: 18px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
+}
+
+/* Main Heading */
+.categoryHeading {
+    width: 90%;
+    margin: 35px auto 22px;
+}
+
+.categoryHeading h2 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 30px;
+    font-weight: 700;
+    color: #172554;
+    letter-spacing: -0.6px;
+}
+
+.categoryHeading p {
+    font-size: 14px;
+    color: #9ca3af;
+    margin-top: 7px;
+}
+
+/* Category Grid */
+.quick {
+    width: 90%;
+    margin: 0 auto 40px;
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 20px;
+}
+
+/* Category Button */
+.quick button {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #f0f0f0;
+    border-radius: 18px;
+    background: #ffffff;
+    cursor: pointer;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    transition: all 0.3s ease;
+}
+
+/* Image Wrapper */
+.quick button div {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    border-radius: 13px;
+    background: #f8fafc;
+}
+
+/* Category Image */
+.quick button img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.35s ease;
+}
+
+/* Category Name */
+.quick button span {
+    margin-top: 12px;
+    font-size: 13px;
+    font-weight: 650;
+    color: #374151;
+    text-align: center;
+    text-transform: capitalize;
+}
+
+/* Hover Effect */
+.quick button:hover {
+    transform: translateY(-5px);
+    border-color: #86efac;
+    box-shadow: 0 8px 22px rgba(22, 163, 74, 0.10);
+}
+
+.quick button:hover img {
+    transform: scale(1.08);
+}
+
+/* Keyboard Accessibility */
+.quick button:focus-visible {
+    outline: 3px solid #16a34a;
+    outline-offset: 3px;
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+    .quick {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+    .outCategory {
+        margin: 8px;
+        padding: 12px 0;
+    }
+
+    .categoryHeading {
+        width: 92%;
+    }
+
+    .categoryHeading h2 {
+        font-size: 22px;
+    }
+
+    .quick {
+        width: 92%;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+    }
+
+    .quick button {
+        padding: 7px;
+        border-radius: 13px;
+    }
+
+    .quick button div {
+        border-radius: 9px;
+    }
+
+    .quick button span {
+        font-size: 12px;
+        margin-top: 8px;
+    }
+}
