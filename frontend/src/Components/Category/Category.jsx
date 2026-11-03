@@ -1,25 +1,38 @@
 
-import React from "react";
-import dairy from "../../assets/images/dairy_products.png";
-import fruits from "../../assets/images/fruits.png";
-import household from "../../assets/images/household_care.png";
-import personal from "../../assets/images/personal_care.png";
-import snacks from "../../assets/images/snacks.png";
-import vegetables from "../../assets/images/vegetables.png";
-import kitchen from "../../assets/images/kitchen_essentials.png";
+import { useEffect, useState } from "react";
 import "./Category.css";
 
 function Category() {
+    const [categories, setCategories] = useState([]);
+    const [error, setError] = useState("");
 
-    const categories=[
-        {name:'Snacks',image:snacks},
-        {name:'Dairy Products',image:dairy},
-        {name:'Kitchen Essentials',image:kitchen},
-        {name:'fruits',image:fruits},
-        {name:'vegetables',image:vegetables},
-        {name:'Skin Care',image:personal},
-        {name:'Household Care',image:household},
-    ]
+    useEffect(() => {
+        const loadCategories = async () => {
+            try {
+                const response = await fetch("http://127.0.0.1:8000/get_category_image");
+
+                if (!response.ok) {
+                    throw new Error("Unable to load categories");
+                }
+
+                const data = await response.json();
+
+                const categoryProducts = data.products.map((product) => ({
+                    name: product.name
+                        .replace(/\.[^.]+$/, "")
+                        .replaceAll("_", " "),
+                    image: product.image_url,
+                }));
+
+                setCategories(categoryProducts);
+            } catch (fetchError) {
+                setError(fetchError.message);
+            }
+        };
+
+        loadCategories();   
+    }, []);
+
     return (
         <div className="outCategory">
         <div className="categoryHeading">
@@ -30,9 +43,10 @@ function Category() {
         </div>
         
          <div className="quick">
+            {error && <p>{error}</p>}
             {categories.map((category, index) => (
-                    <button key={index} className="categoryCard"><
-                        div>
+                    <button key={`${category.name}-${index}`} className="categoryCard">
+                        <div>
                             <img src={category.image} alt={category.name}/>
                         </div>
                         <span>{category.name}</span>
